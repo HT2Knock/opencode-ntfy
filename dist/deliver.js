@@ -1,0 +1,50 @@
+import { Effect, Schedule } from "effect";
+export class DeliveryFailure extends Error {
+    constructor(message) {
+        super(message);
+        this.name = "DeliveryFailure";
+    }
+}
+export function publishUrl(server) {
+    const url = new URL(server.toString());
+    url.pathname = `${url.pathname.replace(/\/+$/u, "")}/`;
+    url.search = "";
+    url.hash = "";
+    return url.toString();
+}
+export function requestBody(topic, push) {
+    const body = {
+        topic,
+        title: push.title,
+        message: push.message,
+        priority: push.priority,
+    };
+    if (push.tags && push.tags.length > 0)
+        body.tags = push.tags;
+    if (push.click !== undefined)
+        body.click = push.click;
+    if (push.delay !== undefined)
+        body.delay = push.delay;
+    return body;
+}
+export function deliver(target, push, fetchImpl = fetch) {
+    const attempt = Effect.gen(function* () {
+        const response = yield* Effect.tryPromise({
+            try: (signal) => fetchImpl(publishUrl(target.server), {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${target.token}`,
+                },
+                body: JSON.stringify(requestBody(target.topic, push)),
+                signal,
+            }),
+            catch: (cause) => new DeliveryFailure(`request failed: ${String(cause)}`),
+        }).pipe(Effect.timeout("5 seconds"), Effect.mapError((error) => error instanceof DeliveryFailure ? error : new DeliveryFailure("request timed out")));
+        if (!response.ok) {
+            return yield* Effect.fail(new DeliveryFailure(`ntfy returned HTTP ${response.status}`));
+        }
+    });
+    return Effect.retry(attempt, Schedule.recurs(1));
+}
+//# sourceMappingURL=deliver.js.map
