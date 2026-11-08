@@ -23,17 +23,24 @@ directory name. Prompt text, tool output, paths, and error stacks are never sent
 
 ## Install
 
-```sh
-opencode plugin add github:HT2Knock/opencode-ntfy#<commit>
-```
+Clone the repository, then add the path to the global OpenCode config:
 
-The package is also a normal plugin entry:
+```sh
+git clone https://github.com/ht2knockA/opencode-ntfy.git ~/personal/opencode-ntfy
+```
 
 ```jsonc
 {
-  "plugins": ["@ht2knock/opencode-ntfy"],
+  "plugins": ["/Users/me/personal/opencode-ntfy"],
 }
 ```
+
+`opencode plugin add` cannot install a Git dependency in OpenCode 2.2.6. The npm
+reify step fails with `git dep preparation failed` for every Git package. Use a
+local path until that is fixed.
+
+Update with `git -C ~/personal/opencode-ntfy pull`. The built `dist` is committed,
+so no build step is needed on the host.
 
 ## Config
 
