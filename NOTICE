@@ -1,0 +1,19 @@
+# Notice
+
+This plugin is a port of ntfy-opencode 0.1.2 by Alex Haines.
+
+Upstream: https://www.npmjs.com/package/ntfy-opencode
+License: MIT, Copyright (c) 2026 Alex Haines
+
+The event classification, permission and question gate, per-location rule,
+process-wide dedupe, and the rule that notification text carries no session
+content come from that package. Its ADRs are kept in `adr/0001` to `0011`.
+
+Changes in this port:
+
+- TypeScript source and tests.
+- OpenCode Effect plugin entry point.
+- Config from `~/.config/opencode/ntfy.json` with `{env:VAR}` substitution.
+- Hold before send, cancelled when the prompt is answered.
+- Quiet hours.
+- A `notify` tool for agent-initiated pings and delayed reminders.

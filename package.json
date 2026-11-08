@@ -1,0 +1,42 @@
+{
+  "name": "@ht2knock/opencode-ntfy",
+  "version": "0.1.0",
+  "description": "OpenCode V2 plugin: ntfy push when a session needs you",
+  "license": "MIT",
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE",
+    "NOTICE"
+  ],
+  "type": "module",
+  "exports": {
+    ".": "./dist/index.js"
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json",
+    "typecheck": "tsc --noEmit",
+    "lint": "oxlint .",
+    "format": "oxfmt .",
+    "format:check": "oxfmt --check .",
+    "test": "bun test",
+    "check": "bun run format:check && bun run lint && bun run typecheck && bun run test"
+  },
+  "devDependencies": {
+    "@opencode/plugin": "2.2.6",
+    "@opencode/schema": "2.2.6",
+    "@types/bun": "^1.4.4",
+    "@types/node": "^24.19.2",
+    "effect": "4.1.0",
+    "oxfmt": "0.77.0",
+    "oxlint": "1.92.0",
+    "typescript": "^5.8.2"
+  },
+  "peerDependencies": {
+    "@opencode/plugin": ">=2.2.6",
+    "effect": "4.1.0"
+  },
+  "engines": {
+    "node": ">=22"
+  }
+}
