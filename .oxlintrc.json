@@ -27,5 +27,6 @@
         "max-lines-per-function": "off"
       }
     }
-  ]
+  ],
+  "ignorePatterns": ["dist/**"]
 }
