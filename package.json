@@ -1,5 +1,5 @@
 {
-  "name": "@ht2knock/opencode-ntfy",
+  "name": "opencode-ntfy-ht2knock",
   "version": "0.1.0",
   "description": "OpenCode V2 plugin: ntfy push when a session needs you",
   "license": "MIT",
