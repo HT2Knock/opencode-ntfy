@@ -26,7 +26,7 @@ directory name. Prompt text, tool output, paths, and error stacks are never sent
 Clone the repository, then add the path to the global OpenCode config:
 
 ```sh
-git clone https://github.com/ht2knockA/opencode-ntfy.git ~/personal/opencode-ntfy
+git clone https://github.com/HT2Knock/opencode-ntfy.git ~/personal/opencode-ntfy
 ```
 
 ```jsonc
