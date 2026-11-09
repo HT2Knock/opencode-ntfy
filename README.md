@@ -69,6 +69,9 @@ Create `~/.config/opencode/ntfy.json` with mode 600:
 | `quiet`        | no       | off                                 |
 | `click`        | no       | none                                |
 
+`click` accepts an `http(s)` URL or an app scheme, for example
+`reynard://open?url=<percent-encoded URL>`.
+
 Any string may use `{env:NAME}`. A missing variable disables the plugin with a
 warning.
 
