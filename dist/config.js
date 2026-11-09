@@ -73,7 +73,7 @@ function targetProblem(raw) {
     if (raw.token.length === 0)
         return "token is empty";
     if (raw.click !== undefined) {
-        const click = urlProblem(raw.click, ["http:", "https:"]);
+        const click = urlProblem(raw.click, ["http:", "https:", "reynard:"]);
         if (click)
             return `click: ${click}`;
     }

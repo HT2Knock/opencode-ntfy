@@ -65,6 +65,14 @@ describe("resolveSettings", () => {
     expect(result.settings.quiet).toBeUndefined();
   });
 
+  test("accepts a custom app scheme for click", () => {
+    const click = "reynard://open?url=https%3A%2F%2Fexample.com";
+    const result = resolveSettings({ ...base, click });
+    expect(result.ok).toBe(true);
+    if (!result.ok) return;
+    expect(result.settings.click).toBe(click);
+  });
+
   test("accepts a quiet window", () => {
     const result = resolveSettings({
       ...base,
